@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  color: white;
+  @include body;
+  line-height: 100%;
+}
+
+::webkit-scrollbar {
+  display: none;
+}
+
+html,
+body,
+#app {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// Body Background
+
+$pages: "home", "destination", "crew", "technology";
+
+body {
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: bottom !important;
+}
+
+@each $page in $pages {
+  body[data-page="#{$page}"] {
+    background: url("~@/assets/#{$page}/background-#{$page}-mobile.jpg");
+
+    @include tablet {
+      background: url("~@/assets/#{$page}/background-#{$page}-tablet.jpg");
+    }
+
+    @include desktop {
+      background: url("~@/assets/#{$page}/background-#{$page}-desktop.jpg");
+    }
+  }
+}
