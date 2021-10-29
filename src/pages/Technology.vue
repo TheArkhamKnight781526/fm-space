@@ -43,6 +43,7 @@
 import { defineComponent } from "vue";
 import Layout from "@/components/layout.vue";
 import { technology } from "@/assets/data.json";
+import KeyChange from "@/functions/keychange";
 
 export default defineComponent({
   name: "Home",
@@ -56,9 +57,14 @@ export default defineComponent({
     Layout,
   },
   computed: {
-    currentTechnology: function(this: any) {
+    currentTechnology: function (this: any) {
       return this.technology[this.current];
     },
+  },
+  mounted() {
+    document.addEventListener("keydown", (e) => {
+      this.current = KeyChange(e, this.current, this.technology.length);
+    });
   },
 });
 </script>
@@ -70,6 +76,12 @@ main {
   align-items: center;
   flex-direction: column;
   width: 100%;
+  max-width: 1440px;
+  position: relative;
+
+  #right {
+    width: 100%;
+  }
 
   #page-title {
     @include nav-text;
@@ -169,24 +181,65 @@ main {
   }
 
   @include desktop {
-    #banner-img-landscape {
-      display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    #page-title {
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
-    #banner-img-portrait {
-      display: block;
+    #right {
+      order: 2;
+      width: max-content;
+      #banner-img-landscape {
+        display: none;
+      }
+
+      #banner-img-portrait {
+        display: block;
+      }
     }
 
-    #info {
-      #terminology {
-        font-size: 16px;
+    #left {
+      flex: 1;
+      flex-direction: row;
+      padding: 0 10%;
+      align-items: center;
+
+      #tech-switcher {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+
+        .switcher {
+          margin-right: 0 !important;
+          width: 80px;
+          @include heading-4;
+
+          &:not(:first-child) {
+            margin-top: 32px;
+          }
+        }
       }
-      #tech-name {
-        font-size: 56px;
-      }
-      #tech-description {
-        font-size: 18px;
-        line-height: 32px;
+
+      #info {
+        text-align: left;
+        flex: 1;
+        max-width: unset;
+
+        #terminology {
+          font-size: 16px;
+        }
+        #tech-name {
+          font-size: 56px;
+        }
+        #tech-description {
+          font-size: 18px;
+          line-height: 32px;
+        }
       }
     }
   }

@@ -61,10 +61,10 @@ export default {
     };
   },
   methods: {
-    activeLink: function(this: any, link: string): any {
+    activeLink: function (this: any, link: string): any {
       return this.$route.path === link ? "active" : "";
     },
-    animateSlide: function(this: any) {
+    animateSlide: function (this: any) {
       this.animate = true;
       setTimeout(() => {
         this.animate = false;

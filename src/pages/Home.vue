@@ -13,7 +13,7 @@
           experience!
         </p>
       </div>
-      <a href="" id="explore-button">Explore</a>
+      <router-link id="explore-button" to="/destination">Explore</router-link>
     </main>
   </Layout>
 </template>

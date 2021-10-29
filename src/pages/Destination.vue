@@ -50,6 +50,7 @@
 import { defineComponent } from "vue";
 import Layout from "@/components/layout.vue";
 import { destinations } from "@/assets/data.json";
+import KeyChange from "@/functions/keychange";
 
 export default defineComponent({
   name: "Home",
@@ -63,21 +64,13 @@ export default defineComponent({
     Layout,
   },
   computed: {
-    currentDestination: function(this: any) {
+    currentDestination: function (this: any) {
       return this.destinations[this.current];
     },
   },
   mounted() {
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") {
-        this.current + 1 === destinations.length
-          ? (this.current = 0)
-          : (this.current = this.current + 1);
-      } else if (e.key === "ArrowLeft") {
-        this.current === 0
-          ? (this.current = destinations.length - 1)
-          : (this.current = this.current - 1);
-      }
+      this.current = KeyChange(e, this.current, this.destinations.length);
     });
   },
 });

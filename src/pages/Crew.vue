@@ -35,6 +35,7 @@
 import { defineComponent } from "vue";
 import Layout from "@/components/layout.vue";
 import { crew } from "@/assets/data.json";
+import KeyChange from "@/functions/keychange";
 
 export default defineComponent({
   name: "Home",
@@ -48,21 +49,13 @@ export default defineComponent({
     Layout,
   },
   computed: {
-    currentCrewMember: function(this: any) {
+    currentCrewMember: function (this: any) {
       return this.crew[this.current];
     },
   },
   mounted() {
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") {
-        this.current + 1 === crew.length
-          ? (this.current = 0)
-          : (this.current = this.current + 1);
-      } else if (e.key === "ArrowLeft") {
-        this.current === 0
-          ? (this.current = crew.length - 1)
-          : (this.current = this.current - 1);
-      }
+      this.current = KeyChange(e, this.current, this.crew.length);
     });
   },
 });
@@ -83,18 +76,22 @@ main {
   #page-title {
     @include nav-text;
     margin-bottom: 50px;
+    white-space: nowrap;
 
     #page-num {
       font-weight: bold;
       opacity: 0.25;
       margin-right: 10px;
       font-size: inherit;
+      white-space: nowrap;
     }
   }
 
   #crew-member-image {
-    width: 100%;
     max-width: fit-content;
+    max-height: 60vh;
+    min-height: 415px;
+    aspect-ratio: 1/2;
     border-bottom: 1px solid $grey;
     margin-bottom: 25px;
   }
