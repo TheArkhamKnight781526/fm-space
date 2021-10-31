@@ -7,7 +7,7 @@
           Pick Your Destination
         </h1>
         <img
-          :src="require(`@/${this.currentDestination.images.png}`)"
+          :src="require(`@/${this.currentDestination.images.webp}`)"
           alt=""
           id="destination-img"
         />

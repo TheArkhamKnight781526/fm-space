@@ -6,7 +6,7 @@
         Meet Your Crew
       </h1>
       <img
-        :src="require(`@/${this.currentCrewMember.images.png}`)"
+        :src="require(`@/${this.currentCrewMember.images.webp}`)"
         alt="Crew Member Picture"
         id="crew-member-image"
       />
